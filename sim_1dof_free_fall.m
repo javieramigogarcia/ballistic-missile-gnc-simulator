@@ -1,6 +1,6 @@
 % --- practica_modulo1.m ---
 clear; clc; close all
-addpath('D:\ING AEROESPACIAL\CUARTO\Misiles\Master_Misiles\funciones');
+addpath('D:\ING AEROESPACIAL\CUARTO\Misiles\Master_Misiles\functions');
 
 % The mission for this exercise is to add aerodynamic drag to the model.
 % 1. INITIAL CONDITIONS
