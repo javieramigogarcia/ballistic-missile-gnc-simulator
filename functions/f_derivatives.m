@@ -8,22 +8,25 @@ function dYdt = f_derivatives(t, Y)
     Rt = 6378140;  % Earth mean radius [m]
 
     % Call parameters
-    [m_t0, m_p1, tb_1, Isp_1] = f_stage1();
+    [m_t0, tb_1, mass_flow1, T1] = f_stage1();
     [t_GT, ~] = f_gravity_turn();
-
-    % Define the mass flow rate and instantaneous mass
-    m_dot1 = m_p1 / tb_1; 
-    m = m_t0 - m_dot1 * t;
-
-    % Calculate the Thrust
-    T = Isp_1 * 9.80665 * m_dot1; 
+    [T2, mass_flow2, m0_phase3, tb_2] = f_stage2();
 
     % Calls external function of gravity
     g = f_gravity(z); 
     
     % Calls internal function of aerodynamic drag
     D = f_aerodynamic_drag(Y);
-    
+
+    % Calculate the stage an its variables
+    if t <= tb_1
+        m = m_t0 - mass_flow1 * t;
+        T = T1;
+    else
+        m = m0_phase3 - mass_flow2 * (t - tb_1);
+        T = T2;
+    end
+
     if t <= t_GT
         % PHASE 1: Strictly vertical (Avoids g/V division by zero)
         dV_dt = (T - D)/m - g * sin(gamma);  
