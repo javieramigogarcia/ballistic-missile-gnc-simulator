@@ -50,6 +50,7 @@ options = odeset('Events', @(t,Y) f_event_burnout(t, Y, tb_1));
 
 
 
+
 % --- PHASE 3: Stage 2 Flight ---
 % Extract the exact state at tb_1 (last row) and transpose to column vector
 Y0_phase3 = Y_phase2(end, :)';
