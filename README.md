@@ -89,3 +89,12 @@ A **PID controller** with **Clamping anti-windup** commands the TVC actuator, co
 
 ---
 
+## Scope & Roadmap
+
+This V1.0 simulator implements an **Ideal Navigation assumption**: the GNC loop has direct, noise-free access to the true vehicle state vector. No sensor models, measurement noise, or estimation delays are simulated. This architectural choice deliberately isolates the guidance and thrust vector control algorithms, allowing their performance to be validated independently of navigation error sources.
+
+**Planned features for V2.0:**
+
+- Introduction of realistic sensor error models (IMU accelerometer/gyroscope bias, noise, and scale factor errors; GPS positional uncertainty).
+- Implementation of an **Extended Kalman Filter (EKF)** for state estimation. An EKF is required — rather than a standard linear Kalman Filter — due to the inherently nonlinear flight dynamics of the vehicle (altitude-dependent gravity $g(z)$, variable atmospheric density $\rho(z)$, and continuously varying mass $\dot{m}$).
+- **6DOF** rigid-body dynamics, replacing the current 2DOF point-mass model with full translational and rotational coupling.
